@@ -1,0 +1,31 @@
+<div class="modal-header">
+	<h4>{{dia.fecha}}</h4>
+</div>
+
+
+<div class="modal-body">
+	<form class="form-horizontal" name="formFestivo">
+        <div class="form-group row">
+            <label class="control-label col-xs-3">Festivo:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="optionSelected as optionSelected.desc for optionSelected in options" ng-model="selectedOption" required></select>
+            </div>
+        </div>
+
+         <div class="form-group row" ng-show="selectedOption.value">
+            <label class="control-label col-xs-3">Razon:</label>
+            <div class="col-xs-7">
+                <input type="text" class="form-control inputCita" placeholder="razon" ng-model="dia.razon"required>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<div class="modal-footer">
+        <button class="btn btn-success" ng-click="guardar()" aria-hidden="true" ng-disabled="formFestivo.$invalid && selectedOption.value">Aceptar</button>
+</div>

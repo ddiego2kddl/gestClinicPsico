@@ -1,0 +1,131 @@
+
+<div class="contenedor border-purple ideat">
+  <table style="width:100%;">
+    <tbody>
+      <tr>
+        <td></td>
+        <td>
+            <select class="form-control sizeLM pull-right" ng-options="vista as vista.desc for vista in tipoVistas" 
+                    ng-model="selectedVista" ng-change="changeTipoVista()"></select>
+        </td>
+        <td></td>
+        <td>
+            <!-- Muestro select de salas y psicologas en todas las vistas menos Salas / Dia -->
+            <select ng-hide="selectedVista.id==4" class="form-control sizeLM pull-left" ng-options="tipoActivo as tipoActivo.desc for tipoActivo in tipoActivos" 
+                    ng-model="selectedTipoActivo" ng-change="changeTipoActivo()"></select>
+            <!-- Muestro datePicker en Salas / Dia -->
+            <p ng-show="selectedVista.id==4" class="input-group sizeLM pull-left">
+                <input type="text" class="form-control" ng-model="dtParse"  close-text="Close" ng-disabled="true"/>
+                <input ng-hide="true" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="true"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="width:10%"><a ng-click="changeIntervalo(-1)">{{intervalo}} Anterior</a></td>
+        <td style="width:35%"></td>
+        <td style="width:10%"><a ng-click="changeIntervalo(0)">{{intervalo}} Actual</a></td>
+        <td style="width:35%"></td>
+        <td style="width:10%"><a ng-click="changeIntervalo(1)">{{intervalo}} Siguiente</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <table class="table table-bordered table-striped table-condensed border-purple" ng-show="selectedVista.id==1 || selectedVista.id==0">
+     <tbody>
+      <colgroup>
+          <col>
+          <col class="pointer">
+          <col class="pointer">
+          <col class="pointer">
+          <col class="pointer">
+          <col class="pointer">
+          <col>
+      </colgroup>
+       <tr class="days border-purple">
+         <th scope="col" title="hour" class="col-xs-1 text-center ideat"></th>
+         <th scope="col" title="Monday" class="col-xs-2  text-center ideat" ng-click="setFestivo(0)">Lunes<br>{{semana[0].desc}}</th>
+         <th scope="col" title="Tuesday" class="col-xs-2  text-center ideat" ng-click="setFestivo(1)">Martes <br>{{semana[1].desc}}</th>
+         <th scope="col" title="Wednesday" class="col-xs-2  text-center ideat" ng-click="setFestivo(2)">Miercoles<br>{{semana[2].desc}}</th>
+         <th scope="col" title="Thursday" class="col-xs-2  text-center ideat" ng-click="setFestivo(3)">Jueves<br>{{semana[3].desc}}</th>
+         <th scope="col" title="Friday" class="col-xs-2  text-center ideat" ng-click="setFestivo(4)">Viernes<br>{{semana[4].desc}}</th>
+         <th scope="col" title="hour" class="col-xs-1  text-center ideat"></th>
+       </tr>
+        <tr ng-repeat="hora in horas">
+          <td ng-repeat="cita in hora" ng-click="go(cita)" class="text-center">
+              <p style="margin:0px;padding:0px;background-color:{{cita.color}};font-weight:bold;" class="overFlow">{{cita.extra}}</p>
+          </td>
+       </tr>
+      </tbody>
+  </table>
+
+  <table class="table table-bordered table-striped table-condensed border-purple" ng-show="selectedVista.id==2 || selectedVista.id==3">
+     <tbody>
+      <colgroup>
+          <col style="pointer">
+          <col class="pointer">
+          <col class="pointer">
+          <col class="pointer">
+          <col class="pointer">
+      </colgroup>
+       <tr class="days border-purple">
+         <th scope="col" title="Monday" class="col-xs-2  text-center ideat">Lunes</th>
+         <th scope="col" title="Tuesday" class="col-xs-2  text-center ideat">Martes</th>
+         <th scope="col" title="Wednesday" class="col-xs-2  text-center ideat">Miercoles</th>
+         <th scope="col" title="Thursday" class="col-xs-2  text-center ideat">Jueves</th>
+         <th scope="col" title="Friday" class="col-xs-2  text-center ideat">Viernes</th>
+       </tr>
+       <tr ng-repeat="semana in mes">
+          <td ng-repeat="dia in semana" class="text-center">
+            <div>
+              <p class="text-center fechaDiaMes">{{dia.fecha}} <span ng-click="addCitaMes(dia)" style="margin-right:10px;" class="glyphicon glyphicon-plus-sign pull-right" aria-hidden="true"></span></p>
+              <div class="diaMes" style="padding:1px">
+                <p class="citaDiaMes" ng-repeat="cita in dia.citas" style="background-color:{{cita.color}};" ng-click="go(cita)">{{cita.extra}}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+
+  <!-- VISTA SALAS / DIA -->
+  <table class="table table-bordered table-striped table-condensed border-purple" ng-show="selectedVista.id==4">
+     <tbody>
+      <colgroup>
+          <col>
+          <col ng-repeat="sala in salas" class="pointer">
+          <col>
+      </colgroup>
+       <tr class="days border-purple">
+         <th scope="col" title="hour" class="text-center ideat" style="width:{{100/(salas.length+2)}}%"></th>
+         <th scope="col" ng-repeat="sala in salas" title="{{sala.desc}}" class="text-center ideat" style="width:{{100/(salas.length+2)}}%">{{sala.desc}}</th>
+         <th scope="col" title="hour" class="text-center ideat" style="width:{{100/(salas.length+2)}}%"></th>
+       </tr>
+        <tr ng-repeat="hora in horasDia">
+          <td ng-repeat="cita in hora.citas track by $index" ng-click="go(cita)" class="text-center tdSalaDia">
+              <p style="margin:0px;padding:0px;background-color:{{cita.color}};font-weight:bold;" class="overFlow" popover="{{cita.extra}}" popover-trigger="mouseenter">{{cita.extra}}</p>
+          </td>
+       </tr>
+      </tbody>
+  </table>
+
+
+<!-- VISTA SALAS / DIA -->
+<div class="contenedor border2-purple ideat">
+  <h4 style="margin-top:0px;padding-top:0px;" ng-hide="guardarColores">Leyenda</h4>
+  <h4 style="margin-top:0px;padding-top:0px;" ng-show="guardarColores"><a ng-click="updateColores()">Presiona aqui para guardar los cambios</a></h4>
+  <div class="row">
+        <div class="col-xs-2" ng-repeat="psicologa in psicologas">
+          <div class="input-group" style="padding:0.2em">
+              <span ng-hide="rol=='Personal'" class="input-group-addon" id="basic-addon1" colorpicker colorpicker-position="top" ng-model="psicologa.color">
+                  <span class="glyphicon glyphicon-tint"></span>
+              </span>
+              <input type="text" ng-disabled=true class="black form-control" style="font-size:1.3em; background-color:{{psicologa.color}};color:black;" value="{{psicologa.nombre}}" aria-describedby="basic-addon1">
+          </div>
+        </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div>
+ 
+	<div class="contenedor border-purple ideat row" style="text-align:center;" ng-show="rol=='Personal' || rol=='Gestion'">
+			  <div class="col-sm-3">
+			  		<input type="text" ng-model="search" class="black form-control" style="width:60%;margin-left:1em;" placeholder="Buscar ....">
+			  </div>
+			  <div class="col-sm-6">
+			  		<ul class="pagination" style="padding:0;margin:0;">
+			  		  <li ng-class="prevClass"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+					  <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+					  <li ng-class="nextClass"><a ng-click="changePage(1)">&raquo; Next</a></li>
+					</ul>
+			  </div>
+			  <div class="col-sm-3">
+			  		<button class="btn btn-success pull-right" style="margin-right:1em" ng-click="nuevoCliente()">Nuevo Paciente +</button>
+			  </div>
+	</div>
+
+	<div class="contenedor border-purple ideat" style="text-align:center;" ng-show="rol=='Admin'">
+		<form class="form-horizontal" name="formPaciente">
+	        <div class="form-group">
+	        	<label class="control-label col-xs-1">Responsable:</label>
+	            <div class="col-xs-3">
+	                <select id="responsable" class="form-control form-control-inline input-sm" ng-model="selectedResponsable" ng-options="responsable.nombre for responsable in responsables">
+					</select>
+	            </div>
+	            <div class="col-xs-4 centerInput" style="text-align:center;">
+	            	<input type="text" ng-model="search" class="black form-control" style="width:50%;margin-left:1em;" placeholder="Buscar ....">
+	            </div>
+	            	
+	            <div class="col-xs-4">
+	            	<button class="btn btn-success pull-right" style="margin-right:1em" ng-click="nuevoCliente()">Nuevo Paciente +</button>
+	            </div>
+	        </div>
+	    </form>
+		<div class="row">
+			  <div class="col-sm-4"></div>
+			  <div class="col-sm-4">
+			  		<ul class="pagination" style="padding:0;margin:0;">
+			  		  <li ng-class="prevClass"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+					  <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+					  <li ng-class="nextClass"><a ng-click="changePage(1)">&raquo; Next</a></li>
+					</ul>
+			  </div>
+			  <div class="col-sm-4"></div>
+		</div>
+	</div>
+
+
+    <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+	    <tbody>
+	        <tr class="days border-purple">
+		         <th title="ID" class="col-xs-1 text-center ideat " ng-click="orderby('id_cliente')">ID</th>
+		         <th title="Nombre" class="col-xs-2  text-center ideat" ng-click="orderby('nombrePaciente')">Nombre</th>
+		         <th title="Apellidos" class="col-xs-2  text-center ideat" ng-click="orderby('apellidosPaciente')">Apellidos</th>
+		         <th title="Fecha Nacimiento" class="col-xs-2  text-center ideat" ng-click="orderby('fechNacPaciente')">Fecha Nacimiento</th>
+		         <th title="Madre" class="col-xs-2  text-center ideat" ng-click="orderby('nombreMadre')">Madre</th>
+		         <th title="Padre" class="col-xs-2  text-center ideat" ng-click="orderby('nombrePadre')">Padre</th>
+	        </tr>
+	    	<tr ng-repeat="cliente in clientes = (data | orderBy:predicate:reverse ) | filter: { id_responsable : selectedResponsable.id_personal } | filter:ignoreAccents | startFrom:currentPage*pageSize | limitTo:pageSize" ng-click="fichaCliente(cliente)">
+	    			<td class="celdasTabla"> {{cliente.id_cliente}}</td>
+	    			<td class="celdasTabla"> {{cliente.nombrePaciente}}</td>
+	    			<td class="celdasTabla"> {{cliente.apellidosPaciente}}</td>
+	    			<td class="celdasTabla"> {{cliente.fechNacPaciente | date:'yyyy-MM-dd'}}</td>
+	    			<td class="celdasTabla"><span popover="Tlf: {{cliente.telefonoMadre}}" popover-trigger="mouseenter">{{cliente.nombreMadre}}</span></td>
+	    			<td class="celdasTabla"><span popover="Tlf: {{cliente.telefonoPadre}}" popover-trigger="mouseenter">{{cliente.nombrePadre}}</span></td>
+	    	</tr>
+	    </tbody>
+    </table>
+	
+</div>
+

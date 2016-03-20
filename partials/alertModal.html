@@ -1,0 +1,15 @@
+<div class="modal-header {{modalClass}}">
+	<h4>{{titulo}}</h4>
+</div>
+
+
+<div class="modal-body">
+		<h5>{{pregunta}}<h5>
+</div>
+
+
+<div class="modal-footer">
+		<button class="btn btn-success"  ng-click="accept()" ng-show="!twoButtons">Continuar</button>
+		<button class="btn btn-success"  ng-click="accept()" ng-show="twoButtons">Aceptar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true" ng-show="twoButtons">Cancelar</button>
+</div>

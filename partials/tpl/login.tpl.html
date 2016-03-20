@@ -1,0 +1,86 @@
+	<!--<div class="container">
+    <div class="fondo_login">
+
+      <form class="form-signin" name="form1">
+        <h2 class="form-signin-heading">Identificate</h2>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus ng-model=user.mail>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model=user.pass>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="form1.$invalid" ng-click="login(user)">Sign in</button>
+      </form>
+      <toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-center'}"></toaster-container>
+
+    </div>
+  </div> -->
+
+<div class="container fondo_login">
+
+  <div class="row">
+    <div class="col-md-8 col-sm-6"></div>
+    <div class="col-md-4 col-sm-6">
+      <a href="http://www.centroideat.com" target="_blank"><img id="logo_login" src="img/logo.png" alt=""></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-2"></div>
+    <div class="col-md-4 col-sm-6">
+      <div class="mainLayout shadow">
+        <div>
+          <div class="tituloLayout white">
+            GESTION CENTRO IDEAT
+          </div>
+        </div>
+            <form class="form-horizontal" name="form1">
+                <div class="spanDiv"></div>
+                <div class="form-group row">
+                    <div class="col-xs-1"></div>
+                    <label class="control-label col-xs-3">Usuario</label>
+                    <div class="col-xs-7">
+                      <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required autofocus ng-model=user.mail>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+                <div class="spanDiv">
+                  <span ng-show="!form1.inputEmail.$pristine && form1.inputEmail.$error.required">Introduza su nombre de usuario!!</span>
+                  <span ng-show="form1.inputEmail.$error.email">No es un email valido</span>
+                </div>
+
+                <div class="form-group row">
+                      <div class="col-xs-1"></div>
+                      <label class="control-label col-xs-3">Password</label>
+                      <div class="col-xs-7">
+                        <input type="password" name="inputPassword" class="form-control" placeholder="Password" ng-model="user.pass" required>
+                      </div>
+                      <div class="col-xs-1"></div>
+                </div>
+
+                <div class="spanDiv">
+                  <span  ng-show="!form1.inputPassword.$pristine && form1.inputPassword.$error.required">Introduzca su password!!</span>
+                </div>
+              
+              <div class="form-group row buttonBox">
+                    <div class="col-xs-7"></div>
+                    <div class="col-xs-4">
+                      <button class="btn btn-primary btn-block" type="submit" ng-disabled="form1.$invalid" ng-click="login(user)">Login</button>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </form>
+      </div>
+    </div>
+    <div class="col-md-5 col-sm-4"></div>
+     </div>
+
+
+     <div class="row footLogin">
+    <div class="col-md-3 col-sm-2"></div>
+    <div class="col-md-4 col-sm-6 white">
+      <p><b>David Diego</b> <BR><a class="url_personal" href="http://www.2kddl.com" target="_blank">www.2kddl.com</a></p>
+    </div>
+    <div class="col-md-5 col-sm-4"></div>
+     </div>
+
+
+</div>

@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<h4>{{titulo}}</h4>
+</div>
+
+
+<div class="modal-body">
+		<accordion close-others="oneAtATime">
+		    <accordion-group heading="Total de horas Seleccionadas: {{asuntosPersonalesTotal}}">
+		    	<div  ng-repeat="asuntosPersonal in asuntosPersonales">
+		    		{{asuntosPersonal.fecha}} / ({{asuntosPersonal.hora}}:00-{{asuntosPersonal.hora2}}:00)
+		    	</div>
+		    </accordion-group>
+		    <accordion-group heading="Horas en conflicto: {{asuntosPersonalesConflictoTotal}}">
+		      	<div  ng-repeat="asuntosPersonal in asuntosPersonalesConflicto">
+		    		{{asuntosPersonal.fecha}} / ({{asuntosPersonal.hora}}:00-{{asuntosPersonal.hora2}}:00)   -->  {{asuntosPersonal.conflicto}}
+		    	</div>
+		    </accordion-group>
+		</accordion>
+
+		<div class="checkbox" ng-show="conflicto && {{asuntosPersonalesTotal-asuntosPersonalesConflictoTotal}} > 0">
+			  <label><input type="checkbox" ng-model="aceptoConflicto" value="">Reservar las {{asuntosPersonalesTotal-asuntosPersonalesConflictoTotal}} horas restantes</label>
+		</div>
+</div>
+
+
+<div class="modal-footer">
+		<button class="btn btn-success"  ng-click="confirmar()" ng-disabled="!aceptoConflicto">Confirmar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+</div>

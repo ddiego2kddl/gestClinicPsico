@@ -1,0 +1,66 @@
+<div class="modal-header">
+	<h4>Editar Serie</h4>
+</div>
+
+
+<div class="modal-body">
+		<accordion close-others="oneAtATime">
+		    <accordion-group heading="Citas Realizadas: {{citasRealizadas.length}}">
+		    	<div  ng-repeat="cita in citasRealizadas">
+		    		Fecha:{{cita.fecha}} - Hora:{{cita.hora}}
+		    	</div>
+		    </accordion-group>
+		    <accordion-group heading="Citas Pendientes: {{citasPendientes.length}}">
+		      	<div  ng-repeat="cita in citasPendientes">
+		    		Fecha:{{cita.fecha}} - Hora:{{cita.hora}}
+		    	</div>
+		    </accordion-group>
+		</accordion>
+
+	<form class="form-horizontal" name="formModificarSerieDatos"  ng-hide="modificarFecha">
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Hora:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="horaSelected as horaSelected for horaSelected in horas" 
+                    ng-model="selectedHora" ng-change="changeHora()" ng-disabled="noEditar" required></select>
+            </div>
+            
+            <label class="control-label col-xs-2">Tipo Cita:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="tipoCitaSelected as tipoCitaSelected.descripcion for tipoCitaSelected in tarifas" ng-model="selectedTipoCita" ng-change="changeTipoCita()" ng-disabled="noEditar" required></select>
+            </div>
+        </div>
+		
+		<div class="form-group row">
+            <label class="control-label col-xs-2">Responsable:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="psicologaSelected as psicologaSelected.nombre for psicologaSelected in psicologas" ng-model="selectedPsicologa" ng-change="changePsicologa()" ng-disabled="noEditar" required></select>
+            </div>
+
+            <label class="control-label col-xs-2">Sala:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="salaSelected as salaSelected.descripcion for salaSelected in salas" ng-model="selectedSala" ng-change="changeSala()" ng-disabled="noEditar" required></select>
+            </div>
+        </div>
+    </form>
+
+    <form class="form-horizontal" name="formModificarSerieFecha" ng-show="modificarFecha">
+        <div class="form-group row">
+            <label class="control-label col-xs-3">Fecha Tope:</label>
+            <div class="col-xs-5">
+                <input type="date" class="form-control inputCita" placeholder="Fin Repeticion" ng-model="fechaFin" required>
+            </div>
+        </div> 
+    </form>
+
+</div>
+
+
+<div class="modal-footer">
+        <button class="btn btn-info" ng-click="modificarFecha = false" aria-hidden="true" ng-show="modificarFecha">Datos</button>
+        <button class="btn btn-info" ng-click="modificarFecha = true" aria-hidden="true" ng-show="!modificarFecha">Fecha Tope</button>
+        <button class="btn btn-danger" ng-click="eliminarSerie()" aria-hidden="true" ng-show="pendientes">Eliminar Pendientes</button>
+		<button class="btn btn-success"  ng-click="guardarNuevosDatos()" ng-show="!modificarFecha && formModificarSerieDatos.$dirty">Guardar Nuevos Datos</button>
+        <button class="btn btn-success"  ng-click="guardarNuevaFecha()" ng-show="modificarFecha && formModificarSerieFecha.$dirty">Guardar Nueva Fecha Tope</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

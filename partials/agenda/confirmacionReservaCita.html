@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<h4>{{titulo}}</h4>
+</div>
+
+
+<div class="modal-body">
+		<accordion close-others="oneAtATime">
+		    <accordion-group heading="Total de Citas Seleccionadas: {{citasTotal}}">
+		    	<div  ng-repeat="cita in citas">
+		    		{{cita.fecha}} / ({{cita.hora}}:00-{{cita.hora2}}:00)
+		    	</div>
+		    </accordion-group>
+		    <accordion-group heading="Citas en conflicto: {{citasConflictoTotal}}">
+		      	<div  ng-repeat="cita in citasConflicto">
+		    		{{cita.fecha}} / ({{cita.hora}}:00-{{cita.hora2}}:00)   -->  {{cita.conflicto}}
+		    	</div>
+		    </accordion-group>
+		</accordion>
+
+		<div class="checkbox" ng-show="conflicto && {{citasTotal-citasConflictoTotal}} > 0">
+			  <label><input type="checkbox" ng-model="aceptoConflicto" value="">Introducir las {{citasTotal-citasConflictoTotal}} citas restantes</label>
+		</div>
+</div>
+
+
+<div class="modal-footer">
+		<button class="btn btn-success"  ng-click="confirmar()" ng-disabled="!aceptoConflicto">Confirmar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+</div>

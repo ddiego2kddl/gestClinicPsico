@@ -1,0 +1,45 @@
+<div class="modal-header">
+	<h4>{{descripcionShow}}</h4>
+</div>
+
+
+<div class="modal-body">
+	<form class="form-horizontal" name="formTarifa">
+        <div class="form-group row">
+            <label class="control-label col-xs-3">Detalle:</label>
+            <div class="col-xs-8">
+                <input type="text" class="form-control inputCita" placeholder="Descripcion" ng-model="tarifa.descripcion"required ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-xs-3">Acronimo:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control inputCita" placeholder="max 5 let" ng-model="tarifa.acronimo"required ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group row" ng-hide="tarifa.bono">
+            <label class="control-label col-xs-3">Precio:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control inputCita" placeholder="euros" ng-model="tarifa.precio" ng-disabled="editar">
+            </div>
+        </div>
+
+
+        <div class="form-group row" ng-hide="tarifa.precio">
+            <label class="control-label col-xs-3">Bono:</label>
+            <div class="col-xs-5">
+                <select class="form-control sizeLM pull-left inputCita" ng-disabled="editar" ng-options="optionSelected as optionSelected.acronimo for optionSelected in options" ng-model="tarifa.bono"></select>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="modal-footer">
+        <button class="btn btn-warning" ng-click="editar=!editar" aria-hidden="true" ng-show="editar">Editar</button>
+        <button class="btn btn-success" ng-click="save()" aria-hidden="true" ng-show="!editar" ng-disabled="formTarifa.$invalid">Guardar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

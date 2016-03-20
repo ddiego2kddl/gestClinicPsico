@@ -1,0 +1,135 @@
+<div class="modal-header">
+	<h4>{{encabezado}}</h4>
+</div>
+
+<div class="modal-body">
+
+<form class="form-horizontal" name="formNewCita">
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Fecha:</label>
+            <div class="col-xs-3">
+                <input type="date" class="form-control inputCita" placeholder="Fecha Nacimiento" ng-model="cita.fecha" ng-disabled="noEditar" required>
+            </div>
+
+            <label class="control-label col-xs-2">Hora:</label>
+            <div class="col-xs-3">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="horaSelected as horaSelected for horaSelected in horas" 
+                    ng-model="selectedHora" ng-change="changeHora()" ng-disabled="noEditar" required></select>
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+		
+		<div class="form-group row">
+            <label class="control-label col-xs-2">Responsable:</label>
+            <div class="col-xs-3">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="psicologaSelected as psicologaSelected.nombre for psicologaSelected in psicologas" ng-model="selectedPsicologa" ng-change="changePsicologa()" ng-disabled="noEditar" required></select>
+            </div>
+
+            <label class="control-label col-xs-2">Sala:</label>
+            <div class="col-xs-3">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="salaSelected as salaSelected.descripcion for salaSelected in salas" ng-model="selectedSala" ng-change="changeSala()" ng-disabled="noEditar" required></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Tipo Cita1:</label>
+            <div class="col-xs-3">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="tipoCitaSelected as tipoCitaSelected.descripcion for tipoCitaSelected in tarifas" ng-model="selectedTipoCita" ng-change="changeTipoCita()" ng-disabled="(noEditar || cita.id_factura) && !nuevaCita" required></select>
+            </div>
+
+            <div ng-hide="!nuevaCita || !repNinguna">
+                <label class="control-label col-xs-2">Duracion:</label>
+                <div class="col-xs-3">
+                    <select class="form-control sizeLM pull-left inputCita" ng-options="cantHorasSelected as cantHorasSelected.desc for cantHorasSelected in cantHoras" ng-model="selectedCantHora" ng-change="changeCantHoras()" ng-disabled="noEditar" required></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Paciente:</label>
+            <div class="col-xs-3">
+                <button ng-click="buscarPaciente()" type="button" class="btn btn-default pull-left inputCita overFlow" ng-disabled="noEditar">{{noPaciente}}</button>
+            </div>
+        </div>
+
+        <div class="form-group row" ng-show="!noEditar">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-3" ng-show="grupo.extra">
+                  <a ng-click="crearGrupo()" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-plus"></span> {{grupo.extra}}
+                  </a>
+            </div>
+            <div class="col-xs-3" ng-show="!grupo.extra && !nuevaCita">
+                  <a ng-click="verGrupo()" class="btn btn-success btn-md">
+                    <span class="glyphicon glyphicon-eye-open"></span>  Pertenece a un grupo
+                  </a>
+            </div>
+        </div>
+
+
+        <div class="form-group row" ng-hide="!nuevaCita">
+            <label class="control-label col-xs-2">Tipo Repeticion:</label>
+            <div class="col-xs-10" ng-init="repNinguna=true">
+                    <label class="checkbox-inline pull-left"><input ng-click="repeticion(0)" ng-model="repNinguna" name="tipoRepeticion" type="checkbox" ng-disabled="noEditar">Ninguna</label>
+                    <label class="checkbox-inline pull-left"><input ng-click="repeticion(7)" ng-model="repSemanal" name="tipoRepeticion" type="checkbox" ng-disabled="noEditar">Semanal</label>
+                    <label class="checkbox-inline pull-left"><input ng-click="repeticion(14)" ng-model="repQuincenal" name="tipoRepeticion" type="checkbox" ng-disabled="noEditar">Quincenal</label>
+            </div>
+        </div>
+
+
+        <div class="form-group row" ng-hide="!nuevaCita">
+            <label class="control-label col-xs-2">Tope Repeticion:</label>
+            <div class="col-xs-3">
+                <input type="date" class="form-control inputCita" ng-model="fechaTopeRepeticion" ng-disabled="repNinguna" ng-disabled="noEditar" >
+            </div>     
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-xs-2">Observaciones:</label>
+            <div class="col-xs-10">
+                <textarea rows="3" class="form-control" placeholder="Observaciones" ng-model="cita.observaciones" ng-disabled="noEditar"></textarea>
+            </div>
+        </div>
+      
+    </form>
+
+</div>
+
+
+     <div class="modal-footer">
+
+        <div class="form-group row">
+            <!--Mostrar ASUNTOSPROPIOS-->
+            <div class="col-xs-4" ng-show="nuevaCita">
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-2">
+                        <button ng-click="asuntosPropios()" type="button" class="btn btn-primary">Asuntos Propios</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-4" ng-show="!nuevaCita">
+                <div class="row" ng-show="esRepeticion">
+                    <div class="col-xs-6">
+                        <label>Serie hasta <BR>{{repeticionExistente.fechaFin}}</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <button ng-click="editarSerie()" type="button" class="btn btn-success pull-left inputCita">Editar Serie</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-7">
+                <button ng-click="facturarCita(cita)" type="button" class="btn btn-success"  ng-show="noEditar && !nuevaCita && cita.id_factura==null && rol!='Personal'">Facturar</button>
+                <button ng-click="verFacturaCita(cita)" type="button" class="btn btn-success"  ng-show="noEditar && !nuevaCita && cita.id_factura!=null && rol!='Personal'">Ver Factura</button>
+                <button class="btn btn-danger" ng-click="eliminarCita()" ng-hide="noEditar || nuevaCita">Eliminar Cita</button>
+                <button class="btn btn-warning" ng-click="cancelarCita()" ng-hide="noEditar || nuevaCita">Cancelar Cita</button>
+                <button class="btn btn-primary" ng-click="guardarCita()" ng-disabled="formNewCita.$invalid" ng-hide="noEditar">Guardar</button>
+                <button class="btn btn-primary" ng-click="noEdicionCitasFacturadas()" ng-show="noEditar">Editar</button>
+                <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+            </div>
+        </div>
+            
+    </div>
+

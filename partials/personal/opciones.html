@@ -1,0 +1,60 @@
+<div class="container" ng-show="rol=='Personal'">
+
+	<form class="form-horizontal" name="formPaciente">
+        <div class="form-group">
+            <label class="control-label col-xs-1">Nombre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Paciente" ng-model="personal.nombre" required ng-disabled=true>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-1">Email:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Paciente" ng-model="personal.email" required ng-disabled=true>
+            </div>
+        </div>
+    </form>
+	
+	<tabset class="opcionesPersonal" ng-init="tabVar=1">
+        <tab heading="Contraseña" ng-click="changeTabVar(1)" active="true"></tab>
+        <tab heading="Alertas" ng-click="changeTabVar(2)" active="false" disabled=true></tab>
+        <tab heading="Actividad" ng-click="changeTabVar(3)" active="false" disabled=true></tab>
+        <tab heading="Historial" ng-click="changeTabVar(4)" active="false" disabled=true></tab> 
+    </tabset>
+
+    <div class="container" ng-show="tabVar==1">
+    	<form class="form-horizontal" name="formPassword">
+	        <div class="form-group">
+	            <label class="control-label col-xs-2">Contraseña Actual:</label>
+	            <div class="col-xs-3">
+	                <input type="password" class="form-control" placeholder="Contraseña Actual" ng-model="password.actual" required>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-xs-2">Nueva Contraseña:</label>
+	            <div class="col-xs-3">
+	                <input type="password" class="form-control" placeholder="Nueva Contraseña" ng-model="password.nueva1" required ng-disabled="password.actual != personal.password">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-xs-2">Repetetir Nueva Contraseña:</label>
+	            <div class="col-xs-3">
+	                <input type="password" name="nueva2" class="form-control" placeholder="Repetetir Nueva Contraseña" ng-model="password.nueva2" required ng-disabled="password.actual != personal.password">
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	        	<div class="col-xs-2"></div>
+		        	<div class="col-xs-3" ng-show="password.nueva2 == password.nueva1 || !formPassword.nueva2.$dirty"></div>
+		            <h5 class="col-xs-3 red" ng-show="password.nueva2 != password.nueva1 && formPassword.nueva2.$dirty">Las contraseñas no coinciden</h5>
+	            <div class="col-xs-2">
+	            	<button class="btn btn-success" ng-click="updatePassword()" aria-hidden="true" ng-disabled="formPassword.$invalid || password.nueva2 != password.nueva1">Cambiar contraseña</button>
+	            </div>
+	        	
+	        </div>
+	    </form>
+
+	    
+    </div>
+
+</div>

@@ -1,0 +1,42 @@
+<div class="modal-header">
+	<h4>{{descripcionShow}}</h4>
+</div>
+
+
+<div class="modal-body">
+	<form class="form-horizontal" name="formSala">
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Nombre:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control inputCita" placeholder="Nombre" ng-model="sala.descripcion"required ng-disabled="editar">
+            </div>
+            <div class="col-xs-1"></div>
+            <label class="control-label col-xs-2">Acronimo:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control inputCita" placeholder="3 letras" ng-model="sala.acronimo"required ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Descripcion:</label>
+            <div class="col-xs-10">
+                <input type="textarea" class="form-control inputCita" placeholder="Descripcion..." ng-model="sala.descripcionLong" ng-disabled="editar">
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<div class="modal-footer">
+        <button class="btn btn-warning" ng-click="editar=!editar" aria-hidden="true" ng-show="editar">Editar</button>
+        <button class="btn btn-success" ng-click="save()" aria-hidden="true" ng-show="!editar" ng-disabled="formSala.$invalid">Guardar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

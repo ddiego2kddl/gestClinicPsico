@@ -1,0 +1,38 @@
+<div class="modal-header">
+	<h4>Asuntos propios del dia:   {{asunto.fechaParseada}}</h4>
+</div>
+
+
+<div class="modal-body">
+	<form class="form-horizontal" name="formFestivo">
+        <div class="form-group row">
+            <label class="control-label col-xs-2 col-xs-offset-2">Responsable:</label>
+            <div class="col-xs-6">
+                <input type="text" disabled class="form-control inputCita" ng-model="asunto.responsable.nombre">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-xs-2 col-xs-offset-2">{{asunto.fecha | date:"yyyy-MM-dd"}}</label>
+            <div class="col-xs-6">
+                <accordion>
+                    <accordion-group class="text-center" heading="{{asuntosPersonales.length}} horas reservadas">
+                            <div class="checkbox text-center" ng-repeat="asuntoPersonal in asuntosPersonales">
+                                <label>
+                                    <input type="checkbox" ng-model="asuntoPersonal.check" class="inputCheckboxHoras" ng-click="check(asuntoPersonal)">
+                                    ({{asuntoPersonal.hora}}h-{{asuntoPersonal.hora*1+1}}h) {{asuntoPersonal.motivo}}
+                                </label>
+                            </div>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+   
+    </form>
+</div>
+
+
+<div class="modal-footer">
+        <button ng-show="asuntoSeleccionado" class="btn btn-danger" ng-click="delete()" data-dismiss="modal" aria-hidden="true">Eliminar seleccionadas</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

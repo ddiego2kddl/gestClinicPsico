@@ -1,0 +1,112 @@
+<div class="modal-header">
+	<h4>Añadir Nuevo Paciente</h4>
+</div>
+
+<div class="modal-body">
+
+<form class="form-horizontal" name="formNewClient">
+        <div class="form-group">
+            <label class="control-label col-xs-1">Nombre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Paciente" ng-model="nuevoCliente.nombrePaciente" required>
+            </div>
+            <label class="control-label col-xs-1">Apelidos:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Apellidos Paciente" ng-model="nuevoCliente.apellidosPaciente" required>
+            </div>
+            <label class="control-label col-xs-1">Fecha Nac:</label>
+            <div class="col-xs-3">
+                <input type="date" class="form-control" placeholder="Fecha Nacimiento" ng-model="nuevoCliente.fechNacPaciente">
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="control-label col-xs-1">Madre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Madre" ng-model="nuevoCliente.nombreMadre">
+            </div>
+            <label class="control-label col-xs-1">Telefono:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Telefono Madre" ng-model="nuevoCliente.telefonoMadre">
+            </div>
+            <label class="control-label col-xs-1">Email:</label>
+            <div class="col-xs-3">
+                <input type="email" class="form-control" placeholder="Email Madre" ng-model="nuevoCliente.emailMadre">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Padre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Padre" ng-model="nuevoCliente.nombrePadre">
+            </div>
+            <label class="control-label col-xs-1">Telefono:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Telefono Padre" ng-model="nuevoCliente.telefonoPadre">
+            </div>
+            <label class="control-label col-xs-1">Email:</label>
+            <div class="col-xs-3">
+                <input type="email" class="form-control" placeholder="Email Padre" ng-model="nuevoCliente.emailPadre">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Población:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Poblacion" ng-model="nuevoCliente.poblacion">
+            </div>
+            <label class="control-label col-xs-1">Provincia:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Provincia" ng-model="nuevoCliente.provincia">
+            </div>
+            <label class="control-label col-xs-1">CP:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Codigo Postal" ng-model="nuevoCliente.codigoPostal">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Direccion:</label>
+            <div class="col-xs-11">
+                <input type="text" class="form-control" placeholder="Direccion : Calle, nº , escalera , porteria" ng-model="nuevoCliente.direccion">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Centro:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Centro Educativo" ng-model="nuevoCliente.centroEducativo">
+            </div>
+            <label class="control-label col-xs-1">Otros:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control"  placeholder="Otros Profesionales" ng-model="nuevoCliente.otrosProfesionales">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Problema:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Definicion del problema" ng-model="nuevoCliente.definicionProblema">
+            </div>
+            <label class="control-label col-xs-1">Remitido:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control"  placeholder="Remitido por.." ng-model="nuevoCliente.remitido">
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label class="control-label col-xs-2">Observaciones:</label>
+            <div class="col-xs-10">
+                <textarea rows="3" class="form-control" placeholder="Observaciones" ng-model="nuevoCliente.observaciones"></textarea>
+            </div>
+        </div>
+        
+    </form>
+     <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="guardarCliente()" ng-disabled="formNewClient.$invalid">Guardar</button>
+            <button class="btn btn-warning" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    </div>
+
+
+    </div>

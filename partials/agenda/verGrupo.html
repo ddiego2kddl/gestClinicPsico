@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <div class="row">
+        <h4 class="col-xs-3">GRUPO</h4>
+        <h5 class="col-xs-3">{{grupo.fecha}}</h5>
+        <h5 class="col-xs-3">HORA: {{grupo.hora}}h</h5>
+        <h5 class="col-xs-3">SALA: {{grupo.id_sala}}</h5>
+    </div>
+</div>
+
+
+<div class="modal-body">
+    <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+        <tbody>
+            <tr class="days border-purple">
+                 <th title="Fecha" class="col-xs-6 text-center ideat">Paciente</th>
+                 <th title="Hora" class="col-xs-3  text-center ideat">Responsable</th>
+                 <th title="Responsable" class="col-xs-2  text-center ideat">Tarifa</th>
+                 <th title="Factura" class="col-xs-1  text-center ideat">Detalle</th>
+            </tr>
+            <tr ng-repeat="cita in citas">
+                    <td class="celdasTabla"> {{cita.cliente.nombrePaciente}} {{cita.cliente.apellidosPaciente}}</td>
+                    <td class="celdasTabla"> {{cita.personal.nombre}}</td>
+                    <td class="celdasTabla"> {{cita.tarifa.acronimo}}</td>
+                    <td class="celdasTabla"> 
+                        <span  ng-click="goCita(cita)"class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<div class="modal-footer">
+    <div class="form-group row">
+        <div class="col-xs-12">
+        <button class="btn btn-warning" ng-click="deshacerGrupo()" ng-disabled="last">Deshacer Grupo</button>
+        <button class="btn btn-success" ng-click="addPaciente()">Añadir Paciente</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+        </div>
+    </div>   
+</div>
+

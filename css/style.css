@@ -1,0 +1,267 @@
+.noPaddingMargin{
+	padding: 0px;
+	margin:0px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.modal-body input{
+	display:block;
+}
+
+.modal-header{
+	background:purple;
+	color:white;
+}
+
+.modal-body{
+	width:100%;
+}
+
+.ng-pristine{
+	text-align:center;
+}
+
+
+.ideat{
+	background:purple;
+	color:white !important;
+}
+
+.ideat a{
+	color:white;
+}
+
+.border-purple{	
+	border:solid 2px purple;
+	border-radius:25px;
+}
+
+.border2-purple{
+	border:solid 10px purple;
+	border-radius:25px;
+}
+
+body{font-size: 1.2em;}
+
+.navbar {
+	font-size:1.5em;;
+}
+
+.contenedor{
+	padding:1%;
+	margin:1%;
+	text-align:center;
+}
+
+.sizeLM{
+	width:50%;
+}
+
+.sizeLM{
+	width:50%;
+}
+
+.table{
+	margin:1%;
+	width:98%;
+}
+select:hover,a:hover{
+	cursor:pointer;
+}
+
+.pointer:hover{
+	background:red;
+}
+
+.black{
+	color:black;
+}
+
+.nav > li > a{
+	color:white;
+}
+
+/*agenda MES*/
+.diaMes{
+	border:solid 5px grey;
+	height:103px;
+    overflow-x: scroll;
+	overflow-x: hidden;
+}
+.fechaDiaMes{
+	margin:0px;
+	padding-top:5px;
+	background-color:grey;
+	font-weight:
+	bold;font-size:1.1em;
+}
+.citaDiaMes {
+    overflow:hidden; /* older browsers */
+    margin:0px;
+    padding:0px;
+    margin-top:1px;
+    font-weight:bold;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1; /* number of lines to show */
+   text-align:center;
+   margin:1px;
+}
+
+.inputCita{
+	width:100%;
+}
+
+.overFlow{
+	overflow:hidden; /* older browsers */
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1; /* number of lines to show */
+}
+
+.modalConfirmacionReservaCita{
+	padding-top:50px;
+}
+
+.modalSearchPaciente{
+	padding-top:50px;
+}
+
+.transpModal{
+	background-color:rgba(100,100,100,0.9);
+}
+
+
+/*alert Modal de utilsServie*/
+.alertModal{background-color:rgba(100,100,100,0.9);padding-top:100px;}
+.modalAlertConfirmacion{background-color:orange;}
+.modalAlertInfo{background-color:green;}
+.modalAlertWarning{background-color:red;}
+
+
+
+.glyMenu{
+	margin-left:0px;
+}
+
+.celdasTabla{text-align:center;font-size:1.2em;font-weight:bold;}
+
+
+/* PUNTEROS */
+.cursor-pointer{cursor:pointer; cursor:hand;}
+.cursor-croshair{cursor: crosshair;}
+.cursor-eresize{cursor: e-resize;}
+.cursor-move{cursor: move;}
+
+
+
+
+/* MENU SUPERIOR */
+.navbar .navbar-nav {display: inline-block;float: none;vertical-align: top;}
+.navbar .navbar-collapse {text-align: center;}
+.navbar-header{float:center;}
+.navbar-toggle{border:1px solid white;}
+.icon-bar{border:1px solid white;}
+.logo img {margin:0.8em;vertical-align: middle;border: 0;page-break-inside: avoid;max-width: 100px !important; position:absolute;}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+tr.inactivo {
+	color:orange !important;
+}
+
+
+.accordionCitas {
+	margin-left:2em;
+	margin-right:2em;
+}
+
+.tdSalaDia{padding-left:0px !important;padding-right:0px !important;}
+
+.citasFactura{overflow:auto;max-height:100px;}
+.inactivoPersonal{color:orange;}
+
+/* FACTURACION */
+.cobrada_si{color:green;}
+.cobrada_no{color:red;}
+.factura_anulada{color:orange;}
+.alignRigth{text-align:right;width:100%;}
+.red{color:red;}
+
+/* LOGIN */
+.fondo_login{height:100vh;padding-top:5em;background: rgb(233,137,255); /* Old browsers */background: -moz-linear-gradient(left,  rgba(233,137,255,1) 0%, rgba(211,35,255,1) 53%, rgba(233,137,255,1) 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(233,137,255,1)), color-stop(53%,rgba(211,35,255,1)), color-stop(100%,rgba(233,137,255,1))); /* Chrome,Safari4+ */background: -webkit-linear-gradient(left,  rgba(233,137,255,1) 0%,rgba(211,35,255,1) 53%,rgba(233,137,255,1) 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(left,  rgba(233,137,255,1) 0%,rgba(211,35,255,1) 53%,rgba(233,137,255,1) 100%); /* Opera 11.10+ */background: -ms-linear-gradient(left,  rgba(233,137,255,1) 0%,rgba(211,35,255,1) 53%,rgba(233,137,255,1) 100%); /* IE10+ */background: linear-gradient(to right,  rgba(233,137,255,1) 0%,rgba(211,35,255,1) 53%,rgba(233,137,255,1) 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e989ff', endColorstr='#e989ff',GradientType=1 ); /* IE6-9 */}
+#logo_login{width:70%;}
+.footLogin{text-align:right;margin-top:50px;}
+.spanDiv{text-align:center;padding-bottom:1em;color:red;height:2em;}
+.white, .white a {color: #fff;font-size:1.4em;}
+.shadow {box-shadow: 8px 8px 8px -2px white;}
+.mainLayout{margin-top:5em;border:2px solid black;background-color:white;}
+.tituloLayout {background-color:black;padding:10px;padding-left:20px;}
+.url_personal{font-size:0.9em !important;}
+
+
+/* HISTORIAL */
+.btn-file {position: relative;overflow: hidden;}
+.btn-file input[type=file] {position: absolute;top: 0;right: 0;min-width: 100%;min-height: 100%;font-size: 100px;text-align: right;filter: alpha(opacity=0);opacity: 0;outline: none;background: white;cursor: inherit;display: block;}
+.center {text-align:center !important;}
+
+
+/*  PACIENTES  */
+.divSelectResponsable{margin-bottom:1em;}
+.form-control-inline {min-width: 0;width: auto;}
+.centerInput {text-align:center;}
+.centerInput input {display:inline-block;margin-left:0px !important;}
+
+/* OPCIONESPERSONAL  */
+.opcionesPersonal ul > li > a{color:purple;}
+.opcionesPersonal{margin:3em 0em;}
+.inputCheckboxHoras{margin-top:2px !important;}
+
+.modal-body, .modal-header, .modal-footer, .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (max-width: 1050px){
+.logo {
+   visibility:hidden;
+}
+@media (max-width: 767px){
+.logo {
+   visibility:visible;
+}
+}
+}
+

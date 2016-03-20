@@ -1,0 +1,39 @@
+<div ng-hide="rol=='Personal'">
+ 
+	<div class="contenedor border-purple ideat row" style="text-align:center;">
+			  <div class="col-sm-3">
+			  		<h4>Salas Disponibles</h4>
+			  </div>
+			  <div class="col-sm-6">
+			  		<ul class="pagination" style="padding:0;margin:0;">
+			  		  <li id="prevPage" class="disabled"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+					  <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+					  <li id="nextPage"><a ng-click="changePage(1)">&raquo; Next</a></li>
+					</ul>
+			  </div>
+			  <div class="col-sm-3">
+			  		<button class="btn btn-success pull-right" style="margin-right:1em" ng-click="edit()">Nueva Sala +</button>
+			  </div>
+	</div>
+
+
+    <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+	    <tbody>
+	         <tr class="days border-purple">
+		         <th title="Acronimo" class="col-xs-2  text-center ideat" ng-click="orderby('acronimo')">Acronimo</th>
+		         <th title="Nombre" class="col-xs-3  text-center ideat" ng-click="orderby('descripcion')">Nombre</th>
+		         <th title="Descripcion" class="col-xs-6  text-center ideat" ng-click="orderby('descripcionLong')">Descripcion</th>
+		         <th title="Acciones" class="col-xs-1  text-center ideat">Acciones</th>
+	        </tr>
+	    	<tr ng-repeat="sala in salas = (data | orderBy:predicate:reverse ) | startFrom:currentPage*pageSize | limitTo:pageSize">
+	    			<td class="celdasTabla"> {{sala.acronimo}}</td>
+	    			<td class="celdasTabla"> {{sala.descripcion}}</td>
+	    			<td class="celdasTabla"> {{sala.descripcionLong}}</td>
+	    			<td class="celdasTabla">
+	    					<span class="glyphicon glyphicon-edit cursor-pointer" aria-hidden="true" popover="Editar" popover-trigger="mouseenter" ng-click="edit(sala)"></span>&nbsp;&nbsp;
+	    					<span class="glyphicon glyphicon-remove cursor-pointer" aria-hidden="true" popover="Eliminar" popover-trigger="mouseenter" ng-click="delete(sala)"></span>
+	    			</td>
+	    </tbody>
+    </table>
+	
+</div>

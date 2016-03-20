@@ -1,0 +1,55 @@
+<div class="modal-header">
+	<h4>Reservar Asuntos Personales</h4>
+</div>
+
+<div class="modal-body">
+
+<form class="form-horizontal" name="formAsuntosPersonales">
+        <div class="form-group row">
+            <label class="control-label col-xs-2">Responsable:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="psicologaSelected as psicologaSelected.nombre for psicologaSelected in psicologas" ng-model="asuntosPersonales.psicologa" ng-change="changePsicologa()" ng-disabled="noEditar" required></select>
+            </div>
+            <label class="control-label col-xs-2">Fecha:</label>
+            <div class="col-xs-4">
+                <input type="date" class="form-control inputCita" placeholder="Fecha Nacimiento" ng-model="asuntosPersonales.fecha" ng-disabled="noEditar" required>
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">    
+            <label class="control-label col-xs-2">Hora:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="horaSelected as horaSelected for horaSelected in horas" 
+                    ng-model="asuntosPersonales.hora" ng-change="changeHora()" ng-disabled="noEditar" required></select>
+            </div>
+            <label class="control-label col-xs-2">Duracion:</label>
+            <div class="col-xs-4">
+                <select class="form-control sizeLM pull-left inputCita" ng-options="cantHorasSelected as cantHorasSelected.desc for cantHorasSelected in cantHoras" ng-model="asuntosPersonales.duracion" ng-change="changeCantHoras()" ng-disabled="noEditar" required></select>
+            </div>
+        </div>
+
+        <div class="form-group row">    
+            <label class="control-label col-xs-2">Motivo:</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control inputCita" placeholder="max 20 caracteres" ng-model="asuntosPersonales.motivo" ng-disabled="noEditar" ng-maxlength="20" maxlength="20" required>
+            </div>
+        </div>
+
+
+</form>
+
+</div>
+
+
+<div class="modal-footer">
+
+    <div class="form-group row">
+        <div class="col-xs-12">
+            <button class="btn btn-primary" ng-click="accept()" ng-disabled="formAsuntosPersonales.$invalid">Aceptar</button>
+            <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+        </div>
+    </div>
+    
+</div>

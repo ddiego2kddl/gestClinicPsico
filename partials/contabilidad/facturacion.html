@@ -1,0 +1,89 @@
+<div ng-hide="rol=='Personal'">
+	<div class="contenedor border-purple ideat" style="text-align:center;">
+		<div class="row" style="padding-bottom:15px;">
+
+			  <div class="col-sm-3 text-center">
+			  		<h4>Facturacion Pacientes</h4>
+			  </div>
+
+			  <div class="col-sm-1">
+			  </div>
+
+			  <div class="col-sm-2">
+			  		<select class="form-control  pull-right" ng-options="rango as rango.year for rango in rangoYears" 
+                    ng-model="yearActivo" ng-change="changeYearActivo()" ng-disabled="desdeSiempre"></select>
+			  </div>
+			  <div class="col-sm-2">
+			  		<select class="form-control pull-left" ng-options="month as month.mes for month in rangoMonths" 
+                    ng-model="monthActivo" ng-change="changeMonthActivo()" ng-disabled="desdeSiempre"></select>
+			  </div>
+
+			  <div class="col-sm-1">
+			  		
+			  </div>
+			  
+			  <div class="col-sm-3">
+				  <a ng-click="facturar()" class="btn btn-success">
+				    <span class="glyphicon glyphicon-list-alt"></span> Generar Facturas
+				  </a>
+			  </div>
+		</div>
+		
+		<div class="row">
+			  <div class="col-sm-4">
+			  		<input type="text" ng-model="search" class="black form-control" style="width:65%;margin-left:1em;" placeholder="Buscar ....">
+			  </div>
+			  <div class="col-sm-4">
+			  		<ul class="pagination" style="padding:0;margin:0;">
+			  		  <li id="prevPage" class="disabled"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+					  <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+					  <li id="nextPage"><a ng-click="changePage(1)">&raquo; Next</a></li>
+					</ul>
+			  </div>
+			  <div class="col-sm-4">
+			  		<div class="checkbox">
+			  			<label>
+					        <input type="checkbox" ng-model="desdeSiempre" ng-change="changeDesdeSiempre()"> Sin Fecha 
+					    </label>
+					    &nbsp;&nbsp;&nbsp;&nbsp;
+					    <label>
+					        <input type="checkbox" ng-model="verAnuladas" ng-change="changeFilters()"> Anuladas 
+					    </label>
+					    &nbsp;&nbsp;&nbsp;&nbsp;
+					    <label>
+					        <input type="checkbox" ng-model="verPendientes" ng-change="changeFilters()" ng-disabled="verAnuladas"> Pendientes 
+					    </label>
+					    &nbsp;&nbsp;&nbsp;&nbsp;
+					    <label>
+					        <input type="checkbox" ng-model="verCobradas" ng-change="changeFilters()" ng-disabled="verAnuladas"> Cobradas
+					    </label>
+					</div>
+			  </div>
+		</div>
+	</div>
+
+
+    <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+	    <tbody>
+	         <tr class="days border-purple">
+		         <th title="Nº Factura" class="col-xs-1  text-center ideat" ng-click="orderby('id_factura')">Nº Factura</th>
+		         <th title="Fecha Emision" class="col-xs-1  text-center ideat" ng-click="orderby('fecha2')">Fecha Emision</th>
+		         <th title="Periodo" class="col-xs-1  text-center ideat">Periodo</th>
+		         <th title="Paciente" class="col-xs-4  text-center ideat" ng-click="orderby('nombrePaciente')">Paciente</th>
+		         <th title="Importe" class="col-xs-1  text-center ideat" ng-click="orderby('importe')" ng-hide="!verCobradas && verPendientes">Importe Total</th>
+		         <th title="Importe" class="col-xs-1  text-center ideat" ng-click="orderby('importe')" ng-show="!verCobradas && verPendientes">Pendiente</th>
+		         <th title="Acciones" class="col-xs-1  text-center ideat">Acciones</th>
+	        </tr>
+	    	<tr ng-repeat="factura in facturas = (dataFilter | orderBy:predicate:reverse ) | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize">
+	    			<td class="celdasTabla"> {{factura.id_factura}}</td>
+	    			<td class="celdasTabla"> {{factura.fecha2}}</td>
+	    			<td class="celdasTabla"> {{factura.mes}} - {{factura.year}}</td>
+	    			<td class="celdasTabla"> {{factura.nombrePaciente}} {{factura.apellidosPaciente}}</td>
+	    			<td class="celdasTabla" ng-hide="!verCobradas && verPendientes"> {{factura.importe}} €</td>
+	    			<td class="celdasTabla red" ng-show="!verCobradas && verPendientes"> {{factura.importePendiente}} €</td>
+	    			<td class="celdasTabla cobrada_{{factura.cobrada}} factura_{{factura.estado}}">
+	    					<span class="glyphicon glyphicon-list-alt cursor-pointer" aria-hidden="true" popover="Ver Factura" popover-trigger="mouseenter" ng-click="showFactura(factura)"></span>
+	    </tbody>
+    </table>
+	
+</div>

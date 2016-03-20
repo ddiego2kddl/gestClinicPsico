@@ -1,0 +1,51 @@
+<div class="modal-header">
+	<h4>Seleccionar o crear un nuevo Paciente para la cita</h4>
+</div>
+
+
+<div class="modal-body">
+	<div>
+	 
+		<div class="contenedor border-purple ideat row" style="text-align:center;">
+				  <div class="col-sm-3">
+				  		<input type="text" ng-model="search" class="black form-control" style="width:80%;margin-left:1em;" placeholder="Buscar ....">
+				  </div>
+				  <div class="col-sm-6">
+				  		<ul class="pagination" style="padding:0;margin:0;">
+				  		  <li id="prevPage" class="disabled"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+						  <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+						  <li id="nextPage"><a ng-click="changePage(1)">&raquo; Next</a></li>
+						</ul>
+				  </div>
+				  <div class="col-sm-3">
+				  		<button class="btn btn-success pull-right" style="margin-right:1em" ng-click="showModal('lg')">Nuevo +</button>
+				  </div>
+		</div>
+
+
+	    <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+		    <tbody>
+		        <tr class="days border-purple">
+			         <th title="Nombre" class="col-xs-3  text-center ideat" ng-click="orderby('nombrePaciente')">Nombre</th>
+			         <th title="Apellidos" class="col-xs-4  text-center ideat" ng-click="orderby('apellidosPaciente')">Apellidos</th>
+			         <th title="Observaciones" class="col-xs-5  text-center ideat">Observaciones</th>
+		        </tr>
+		    	<tr ng-repeat="cliente in clientes = (data | orderBy:predicate:reverse ) | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize" ng-click="fichaCliente(cliente)">
+		    			<td> {{cliente.nombrePaciente}}</td>
+		    			<td> {{cliente.apellidosPaciente}}</td>
+		    			<td> {{cliente.observaciones}}</td>
+		    	</tr>
+		    </tbody>
+	    </table>
+		
+	</div>
+</div>
+
+
+
+
+
+
+<div class="modal-footer">
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

@@ -1,0 +1,72 @@
+<div class="wrap">
+<nav class="navbar navbar-static-top ideat">
+    <a href="http://www.centroideat.com" target="_blank" class="ideat logo"><img src="img/logo.png" alt=""></a>
+    <div class="navbar-header">
+      <div class="container ideat"> 
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          	<!-- AGENDA -->
+            <li><a href="#/menu/agenda" class="ideat"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Agenda</a></li>
+            <!-- CLIENTES -->
+            <li><a href="#menu/clienteTabla" class="ideat"><span class="glyphicon glyphicon-user glyMenu" aria-hidden="true"></span> Pacientes</a></li>
+            <!-- ADMINISTRAR -->
+            <li class="dropdown" ng-hide="rol=='Personal'">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Administrar<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#/menu/personal">Personal</a></li>
+                <li class="divider"></li>
+                <li><a href="#/menu/salas">Salas</a></li>
+                <li class="divider"></li>
+                <li><a href="#/menu/tarifas">Tarifas</a></li>
+                <li class="divider"></li>
+                <li><a href="#/menu/tarifasBonos">Tarifas Bonos</a></li>
+              </ul>
+            </li>
+            <!-- CONTABILIDAD -->
+            <li class="dropdown" ng-hide="rol=='Personal'">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Contabilidad<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#/menu/facturacion">Facturacion</a></li>
+                <li class="divider"></li>
+                <li><a href="">Gastos</a></li>
+                <li class="divider"></li>
+                <li><a href="">Balance</a></li>
+                <li class="divider"></li>
+                <li><a href="">Estadisticas</a></li>
+              </ul>
+            </li>
+            <!-- RECURSOS -->
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Recursos<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#/menu/materiales">Materiales</a></li>
+                <!--
+                <li class="divider"></li>
+                <li><a href="">Biblioteca</a></li>
+                <li class="divider"></li>
+                <li><a href="">Pruebas de Evaluacion</a></li>
+                -->
+              </ul>
+            </li>
+            <!-- CONFIG -->
+            <li ng-show="rol=='Personal'">
+              <a href="#/menu/opcionesPersonal" class="ideat"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Opciones</a>
+            </li>
+            <!-- DESCONECTAR -->
+            <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</a></li>
+            
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+	<div ui-view></div>
+
+</div>

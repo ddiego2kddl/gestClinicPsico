@@ -1,0 +1,49 @@
+<div class="modal-header {{modalClass}}">
+	<h4>Cobro de Factura Nº:{{factura.id_factura}}</h4>
+</div>
+
+
+<div class="modal-body">
+		<form class="form-horizontal" name="formFacturaCobro">
+
+	        <div class="form-group row">
+	            <label class="control-label col-xs-4">Importe Total:</label>
+	            <div class="col-xs-3">
+	           		 <input type="text" class="form-control inputCita center" ng-disabled="true" value="{{factura.importe}} €">
+	            </div>
+	        </div>
+
+	       <div class="form-group row">
+	            <label class="control-label col-xs-4">Pendiente:</label>
+	            <div class="col-xs-3">
+	           		 <input type="text" class="form-control inputCita center" ng-disabled="true" value="{{factura.importePendiente}} €">
+	            </div>
+	        </div>
+
+	        <hr>
+
+	        <div class="form-group row" ng-init="valueRange = factura.importePendiente">
+	            <label class="control-label col-xs-4">Cantidad del cobro:</label>
+	            <div class="col-xs-3">
+	           		 <input type="text" class="form-control inputCita center" ng-disabled="false" ng-model="cobro.cantidad">
+	            </div>
+				<div class="col-xs-3">
+	            	<ngRange ng-model="cobro.cantidad" ngRangeMax="{{factura.importePendiente}}" ngRangeMin="0" ngRangeMax="factura.importePendiente" ngRangeStep="5" required>
+	           	</div>
+	        </div>
+
+	        <div class="form-group row">
+	            <label class="control-label col-xs-4">Forma de pago:</label>
+	            <div class="col-xs-4">
+	           		 <select class="form-control sizeLM pull-left inputCita" ng-options="formadePagoSelected as formadePagoSelected for formadePagoSelected in formasDePago" ng-model="cobro.formaDePago" required></select>
+	            </div>
+	        </div>
+
+	     </form>
+</div>
+
+
+<div class="modal-footer" ng-init="editar=false">
+		<button class="btn btn-success"  ng-click="confirmarCobro()" ng-disabled="cobro.cantidad>factura.importePendiente || cobro.cantidad<=0">Confirmar</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+</div>

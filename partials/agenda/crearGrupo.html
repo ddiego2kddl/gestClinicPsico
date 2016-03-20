@@ -1,0 +1,30 @@
+<div class="modal-header">
+	<h4>Crear Grupo Nuevo</h4>
+</div>
+
+<div class="modal-body">
+
+<form class="form-horizontal" name="formNewCita">
+    <div class="row" ng-init="tipoGrupo=true">
+        <div class="col-xs-12" ng-show="repeticion">
+            <label class="checkbox-inline pull-left"><input ng-click="tipoSimple=!tipoSimple" ng-model="tipoGrupo" type="checkbox">Serie Completa</label>
+        </div>
+        <div class="col-xs-12">
+            <label class="checkbox-inline pull-left"><input ng-click="tipoGrupo=!tipoGrupo" ng-model="tipoSimple" type="checkbox">Unicamente esta Cita</label>
+         </div>
+    </div>
+</form>
+
+</div>
+
+
+<div class="modal-footer">
+
+    <div class="form-group row">
+        <div class="col-xs-12">
+            <button class="btn btn-primary" ng-click="accept()">Aceptar</button>
+            <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+        </div>
+    </div>
+    
+</div>

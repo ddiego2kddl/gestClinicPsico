@@ -1,0 +1,140 @@
+<div class="modal-header {{modalClass}}">
+	<h4>FACTURA Nº: {{factura.id_factura}}</h4>
+</div>
+
+
+<div class="modal-body">
+		<form class="form-horizontal" name="formShowFactura">
+
+	        <div class="form-group row">
+	            <label class="control-label col-xs-3">Paciente:</label>
+	            <div class="col-xs-7">
+	           		 <input type="text" class="form-control inputCita" ng-disabled="true" value="{{factura.cliente.nombrePaciente}} {{factura.cliente.apellidosPaciente}}">
+	            </div>
+	        </div>
+
+	       <div class="form-group row">
+	            <label class="control-label col-xs-3">Periodo:</label>
+	            <div class="col-xs-3">
+	           		 <input type="text" class="form-control inputCita" ng-disabled="true" value="{{factura.month}} / {{factura.year}}">
+	            </div>
+	        </div>
+
+	        <div class="form-group">
+	            <label class="control-label col-xs-3">Observaciones:</label>
+	            <div class="col-xs-9">
+	                <textarea rows="3" class="form-control" placeholder="Observaciones" ng-model="factura.observaciones" ng-disabled="!editar"></textarea>
+	            </div>
+	        </div>
+
+	        <div class="form-group row" ng-show="!anulada">
+	            <label class="control-label col-xs-3">Citas:</label>
+	            <div class="col-xs-9">
+	            	<accordion>
+	            		<accordion-group heading="Ver listado de citas">
+		           			<table class="table table-bordered table-striped table-condensed table-hover border-purple">
+	                            <tbody>
+	                                <tr class="days border-purple">
+	                                     <th title="Fecha" class="col-xs-1 text-center ideat">Nº</th>
+	                                     <th title="Hora" class="col-xs-5  text-center ideat">Fecha</th>
+	                                     <th title="Responsable" class="col-xs-5  text-center ideat">Tarifa</th>
+	                                     <th title="Detalle" class="col-xs-1  text-center ideat">Detalle</th>
+	                                </tr>
+	                                <tr ng-repeat="cita in factura.citas">
+	                                        <td class="celdasTabla"> {{cita.count}}</td>
+	                                        <td class="celdasTabla"> {{cita.fecha2}}</td>
+	                                        <td class="celdasTabla"> {{cita.acronimo}}</td>
+	                                        <td class="celdasTabla"> 
+	                                            <span  ng-click="goCita(cita)"class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+	                                        </td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+                        </accordion-group>
+                    </accordion>
+	            </div>
+	        </div>
+
+	        <div class="form-group row">
+	            <label class="control-label col-xs-3">Conceptos:</label>
+	            <div class="col-xs-9">
+	           			<table class="table table-bordered table-striped table-condensed table-hover border-purple">
+                            <tbody>
+                                <tr class="days border-purple">
+                                     <th title="Fecha" class="col-xs-1 text-center ideat">Cant</th>
+                                     <th title="Hora" class="col-xs-5  text-center ideat">Tarifa</th>
+                                     <th title="Responsable" class="col-xs-5  text-center ideat">Precio</th>
+                                </tr>
+                                <tr ng-repeat="concepto in factura.conceptos">
+                                        <td class="celdasTabla"> {{concepto.count}}</td>
+                                        <td class="celdasTabla">
+                                        	<p class="noPaddingMargin" popover="{{concepto.detalle}}" popover-trigger="mouseenter">{{concepto.descripcion}}</p>
+                                        </td>
+                                        <td class="celdasTabla"> {{concepto.precio}} €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+	            </div>
+	        </div>
+
+	        <div class="form-group row">
+	            <div class="col-xs-6"></div>
+	            <div class="col-xs-2">
+	            	<label class="control-label alignRigth">Total:</label>
+	            </div>
+	            <div class="col-xs-3 input-group container">
+		              <input type="number" class="black form-control text-center" min="{{factura.importeCobrado}}" ng-model="factura.importe" ng-disabled="!editar" required>
+			           <span class="input-group-addon" id="basic-addon1">
+		                  <span class="glyphicon glyphicon-euro"></span>
+		              </span>
+	            </div>
+	        </div>
+
+	        <div class="form-group row" ng-show="factura.cobros.length">
+	            <label class="control-label col-xs-3">Cobros1:</label>
+	            <div class="col-xs-9">
+	           			<table class="table table-bordered table-striped table-condensed table-hover border-purple">
+                            <tbody>
+                                <tr class="days border-purple">
+                                     <th title="Fecha" class="col-xs-3 text-center ideat">Fecha</th>
+                                     <th title="Forma de Pago" class="col-xs-6  text-center ideat">Forma de pago</th>
+                                     <th title="Cantidad" class="col-xs-3  text-center ideat">Cantidad</th>
+                                     <th ng-show="editar" title="Borrar" class="col-xs-0  text-center ideat">Borrar</th>
+                                </tr>
+                                <tr ng-repeat="cobro in factura.cobros">
+                                        <td class="celdasTabla">{{cobro.fecha | date:'dd-MM-yyyy'}}</td>
+                                        <td class="celdasTabla">{{cobro.tipo}}</td>
+                                        <td class="celdasTabla">{{cobro.cantidad}} €</td>
+                                        <td ng-show="editar" class="celdasTabla"><span class="glyphicon glyphicon-remove m10 red cursor-pointer" ng-click="removeCobro(cobro)"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+	            </div>
+	        </div>
+
+	        <div class="form-group row">
+	            <div class="col-xs-6"></div>
+	            <div class="col-xs-2">
+	            	<label class="control-label alignRigth">Pendiente:</label>
+	            </div>
+	            <div class="col-xs-3 input-group container">
+		              <input type="text" class="black form-control text-center" ng-model="factura.importePendiente" ng-disabled=true>
+			           <span class="input-group-addon" id="basic-addon1">
+		                  <span class="glyphicon glyphicon-euro"></span>
+		              </span>
+	            </div>
+	        </div>
+
+	     </form>
+</div>
+
+
+<div class="modal-footer" ng-init="editar=false">
+		<button class="btn btn-warning"  ng-disabled="true" ng-show="anulada">FACTURA ANULADA</button>
+		<button class="btn btn-success"  ng-click="update(true)" ng-show="editar && !anulada" ng-disabled="formShowFactura.$invalid">Guardar Cambios</button>
+		<button class="btn btn-warning"  ng-click="update(false)" ng-show="editar && !anulada">Cancelar Cambios</button>
+		<button class="btn btn-danger"  ng-click="anular()" ng-show="editar && !anulada && factura.cobros.length<=0">Anular Factura</button>
+		<button class="btn btn-success"  ng-click="editar=!editar" ng-show="!editar && !anulada">Editar</button>
+		<button class="btn btn-success"  ng-click="cobrar()" ng-show="!editar && factura.importePendiente!=0 && !anulada">Realizar Cobro</button>
+        <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+</div>

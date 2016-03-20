@@ -1,0 +1,290 @@
+
+<div class="modal-header">
+    <tabset ng-init="tabVar=1">
+        <tab heading="Información" ng-click="changeTabVar(1)" active="true"></tab>
+        <tab heading="Citas" ng-click="changeTabVar(2)" active="false"></tab>
+        <tab heading="Historial" ng-click="changeTabVar(3)" active="false"></tab>
+        <tab heading="Facturacion" ng-click="changeTabVar(4)" active="false" ng-hide="rol=='Personal'"></tab>
+        <div class="table-close pull-right">
+            <span class="glyphicon glyphicon-remove m10 pull-right" ng-click="cancel()"></span>
+         	<h4 class="pull-right">{{cliente.nombrePaciente}} {{cliente.apellidosPaciente}}</h4>
+        </div>
+    </tabset>
+</div>
+
+<div class="modal-body">
+
+<!--    *******************
+        ***** DIV  INFO *** 
+        *******************		-->
+    <div ng-show="tabVar==1" style="padding:1em;">
+		<form class="form-horizontal" name="formPaciente">
+        <div class="form-group">
+            <label class="control-label col-xs-1">Nombre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Paciente" ng-model="cliente.nombrePaciente" required ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Apelidos:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Apellidos Paciente" ng-model="cliente.apellidosPaciente" required ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Fecha Nac:</label>
+            <div class="col-xs-3">
+                <input type="date" class="form-control" placeholder="Fecha Nacimiento" ng-model="cliente.fechNacPaciente" ng-disabled="editar">
+            </div>
+        </div>
+		
+		<div class="form-group">
+            <label class="control-label col-xs-1">Madre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Madre" ng-model="cliente.nombreMadre" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Telefono:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Telefono Madre" ng-model="cliente.telefonoMadre" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Email:</label>
+            <div class="col-xs-3">
+                <input type="email" class="form-control" placeholder="Email Madre" ng-model="cliente.emailMadre" ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Padre:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Nombre Padre" ng-model="cliente.nombrePadre" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Telefono:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Telefono Padre" ng-model="cliente.telefonoPadre" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Email:</label>
+            <div class="col-xs-3">
+                <input type="email" class="form-control" placeholder="Email Padre" ng-model="cliente.emailPadre" ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Población:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Poblacion" ng-model="cliente.poblacion" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Provincia:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control"  placeholder="Provincia" ng-model="cliente.provincia" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">CP:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" placeholder="Codigo Postal" ng-model="cliente.codigoPostal" ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Direccion:</label>
+            <div class="col-xs-11">
+                <input type="text" class="form-control" placeholder="Direccion : Calle, nº , escalera , porteria" ng-model="cliente.direccion" ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Centro:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Centro Educativo" ng-model="cliente.centroEducativo" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Otros:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control"  placeholder="Otros Profesionales" ng-model="cliente.otrosProfesionales" ng-disabled="editar">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-1">Problema:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Definicion del problema" ng-model="cliente.definicionProblema" ng-disabled="editar">
+            </div>
+            <label class="control-label col-xs-1">Remitido:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control"  placeholder="Remitido por.." ng-model="cliente.remitido" ng-disabled="editar">
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label class="control-label col-xs-2">Observaciones:</label>
+            <div class="col-xs-10">
+                <textarea rows="3" class="form-control" placeholder="Observaciones" ng-model="cliente.observaciones" ng-disabled="editar"></textarea>
+            </div>
+        </div>
+        
+    </form>
+     <div class="modal-footer">
+        <div class="row">
+            <label class="control-label col-xs-2">Responsable:</label>
+            <div class="col-xs-3">
+                 <select id="responsable" class="form-control form-control-inline input-sm" ng-model="selectedResponsable" ng-options="responsable.nombre for responsable in responsables" ng-disabled="rol!='Admin' || editar" ng-change="changeResponsable()">
+                    </select>
+            </div>
+            <div class="col-xs-7">
+                <button class="btn btn-warning" ng-click="editar=!editar" aria-hidden="true" ng-show="editar">Editar</button>
+                <button class="btn btn-success" ng-click="save()" aria-hidden="true" ng-show="!editar" ng-disabled="formPaciente.$invalid">Guardar</button>
+                <button class="btn btn-danger" ng-click="cancel()" data-dismiss="modal" aria-hidden="true">Salir</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+<!--    *******************
+        ***** DIV CITAS *** 
+        *******************		-->
+    <div ng-show="tabVar==2" class="accordionCitas">
+		<accordion>
+			<accordion-group heading="{{year.year}}" ng-repeat="year in years">
+					       <accordion>
+                                <accordion-group heading="{{mesesDescripcion[month.month-1]}}" ng-repeat="month in year.months" ng-click="getCitas(year.year,month.month)">
+                                        <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+                                            <tbody>
+                                                <tr class="days border-purple">
+                                                     <th title="Fecha" class="col-xs-3 text-center ideat">Dia</th>
+                                                     <th title="Hora" class="col-xs-3  text-center ideat">Hora</th>
+                                                     <th title="Responsable" class="col-xs-2  text-center ideat">Responsable</th>
+                                                     <th title="Factura" class="col-xs-1  text-center ideat">Grupo</th>
+                                                     <th title="Factura" class="col-xs-1  text-center ideat">Factura</th>
+                                                     <th title="Detalle" class="col-xs-1  text-center ideat">Detalle</th>
+                                                </tr>
+                                                <tr ng-repeat="cita in citas">
+                                                        <td class="celdasTabla"> {{cita.diaDesc}} - {{cita.diaNum}}</td>
+                                                        <td class="celdasTabla"> {{cita.hora}}h - {{cita.hora2}}h</td>
+                                                        <td class="celdasTabla {{cita.responsable.estado}}Personal">
+                                                            <p class="noPaddingMargin"aria-hidden="true" popover="{{cita.responsable.estado}}" popover-trigger="mouseenter">{{cita.responsable.nombre}}</p>
+                                                        </td>
+                                                        <td class="celdasTabla" ng-click="verGrupo(cita)"> {{cita.grupo}}</td>
+                                                        <td class="celdasTabla"> {{cita.factura}}</td>
+                                                        <td class="celdasTabla"> 
+                                                            <span  ng-click="goCita(cita)" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                        </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </accordion-group>
+                            </accordion>
+			</accordion-group>
+		</accordion>	
+
+    </div>
+
+
+
+<!--    *******************
+        ***** DIV HISTO *** 
+        *******************		-->
+    <div ng-show="tabVar==3" class="accordionCitas">
+		<accordion>
+            <div class="container" ng-show="noDocumentos"><h3>No se encuentra ningun documento!</h3></div>
+            <accordion-group heading="{{tipoDocumento.tipo}}" ng-repeat="tipoDocumento in tipoDocumentos"  ng-show="!noDocumentos">
+                           <accordion ng-show="tipoDocumento.tipo=='Coordinaciones'">
+                                <accordion-group heading="{{subtipos.subtipo}}" ng-repeat="subtipos in tipoCoordinaciones">
+                                        <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+                                            <tbody>
+                                                <tr class="days border-purple">
+                                                     <th title="File" class="col-xs-1  text-center ideat">File</th>
+                                                     <th title="Titulo" class="col-xs-3  text-center ideat">Titulo</th>
+                                                     <th title="Descripcion" class="col-xs-4  text-center ideat">Descripcion</th>
+                                                     <th title="Edicion" class="col-xs-2 text-center ideat">Ultima Edicion</th>
+                                                     <th title="Accion" class="col-xs-2  text-center ideat">Accion</th>
+                                                </tr>
+                                                <tr ng-repeat="documento in documentos | filter:{subtipo:subtipos.subtipo}">
+                                                        <td class="celdasTabla"> <img ng-click="downloadFile(documento)" class="cursor-pointer" aria-hidden="true" popover="Download" popover-trigger="mouseenter"style="width:40%" ng-src="img/{{documento.extension}}.png"></td>
+                                                        <td class="celdasTabla"> {{documento.titulo}}</td>
+                                                        <td class="celdasTabla"> <p class="overFlow" popover="{{documento.descripcion}}" popover-trigger="mouseenter">{{documento.descripcion}}</p></td>
+                                                        <td class="celdasTabla"> {{documento.fecha_modificacion}}</td>
+                                                        <td class="celdasTabla"> 
+                                                            <span  style="font-size:1.5em;color:purple;" ng-click="uploadTrigger(documento)" class="glyphicon glyphicon-cloud-upload cursor-pointer" aria-hidden="true" popover="Modificar" popover-trigger="mouseenter"></span>
+                                                            &nbsp
+                                                            <input style="display:none" id="inputFileUpdate" type="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                                                            <span  style="font-size:1.5em;color:purple;" ng-click="deleteFile(documento)" class="glyphicon glyphicon-remove-circle cursor-pointer" aria-hidden="true" popover="Eliminar" popover-trigger="mouseenter"></span>
+                                                            &nbsp
+                                                            <span  ng-hide="documento.url_backup==''" style="font-size:1.5em;color:purple;" ng-click="downloadBackup(documento)" class="glyphicon glyphicon-duplicate cursor-pointer" aria-hidden="true" popover="Backup" popover-trigger="mouseenter"></span>
+                                                        </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </accordion-group>
+                            </accordion>
+                            <table class="table table-bordered table-striped table-condensed table-hover border-purple" ng-hide="tipoDocumento.tipo=='Coordinaciones'">
+                                <tbody>
+                                    <tr class="days border-purple">
+                                         <th title="File" class="col-xs-1  text-center ideat">File</th>
+                                         <th title="Titulo" class="col-xs-3  text-center ideat">Titulo</th>
+                                         <th title="Descripcion" class="col-xs-4  text-center ideat">Descripcion</th>
+                                         <th title="Edicion" class="col-xs-2 text-center ideat">Ultima Edicion</th>
+                                         <th title="Accion" class="col-xs-2  text-center ideat">Accion</th>
+                                    </tr>
+                                    <tr ng-repeat="documento in documentos | filter:{tipo:tipoDocumento.tipo}">
+                                            <td class="celdasTabla"> <img ng-click="downloadFile(documento)" class="cursor-pointer" aria-hidden="true" popover="Download" popover-trigger="mouseenter"style="width:40%" ng-src="img/{{documento.extension}}.png"></td>
+                                            <td class="celdasTabla"> {{documento.titulo}}</td>
+                                            <td class="celdasTabla"> <p class="overFlow" popover="{{documento.descripcion}}" popover-trigger="mouseenter">{{documento.descripcion}}</p></td>
+                                            <td class="celdasTabla"> {{documento.fecha_modificacion}}</td>
+                                            <td class="celdasTabla"> 
+                                                <span  style="font-size:1.5em;color:purple;" ng-click="uploadTrigger(documento)" class="glyphicon glyphicon-cloud-upload cursor-pointer" aria-hidden="true" popover="Modificar" popover-trigger="mouseenter"></span>
+                                                &nbsp
+                                                <input style="display:none" id="inputFileUpdate" type="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                                                <span  style="font-size:1.5em;color:purple;" ng-click="deleteFile(documento)" class="glyphicon glyphicon-remove-circle cursor-pointer" aria-hidden="true" popover="Eliminar" popover-trigger="mouseenter"></span>
+                                                &nbsp
+                                                <span  ng-hide="documento.url_backup==''" style="font-size:1.5em;color:purple;" ng-click="downloadBackup(documento)" class="glyphicon glyphicon-duplicate cursor-pointer" aria-hidden="true" popover="Backup" popover-trigger="mouseenter"></span>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+            </accordion-group>
+		</accordion>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="newFileModal()" aria-hidden="true">Añadir Nuevo Documento</button>
+        </div>
+    </div>
+
+<!--    *******************
+        ***** DIV FACTU *** 
+        *******************		-->
+    <div ng-if="tabVar==4 && rol!='Personal'">
+        <div class="container" ng-show="noFacturas">
+            <div class="container">
+                <h3>No se encontraron Facturas para este paciente!</h3>  
+            </div>
+        </div>
+        <div ng-if="!noFacturas">
+            <div class="row" ng-show="facturas.length>10">
+                  <div class="col-sm-4"> </div>
+                  <div class="col-sm-4">
+                        <ul class="pagination" style="padding:0;margin:0;">
+                          <li id="prevPage" ng-class="prevPageClass"><a ng-click="changePage(-1)">&laquo; Prev</a></li>
+                          <li class="disabled"><a>Pagina {{currentPage+1}} de {{numberOfPages()}}</a></li>
+                          <li id="nextPage" ng-class="nextPageClass"><a ng-click="changePage(1)">&raquo; Next</a></li>
+                        </ul>
+                  </div>
+            </div>
+
+            <table class="table table-bordered table-striped table-condensed table-hover border-purple">
+                <tbody>
+                     <tr class="days border-purple">
+                         <th title="Nº Factura" class="col-xs-1  text-center ideat" ng-click="orderby('id_factura')">Nº</th>
+                         <th title="Periodo" class="col-xs-4  text-center ideat">Periodo</th>
+                         <th title="Paciente" class="col-xs-2  text-center ideat" ng-click="orderby('importe')">Importe Total</th>
+                         <th title="Importe" class="col-xs-2  text-center ideat" ng-click="orderby('importeCobrado')">Importe Cobrado</th>
+                         <th title="Importe" class="col-xs-2  text-center ideat" ng-click="orderby('importePendiente')">Importe Pendiente</th>
+                         <th title="Acciones" class="col-xs-1  text-center ideat" ng-click="orderby('estado')">Detalle</th>
+                    </tr>
+                    <tr ng-repeat="factura in facturas | orderBy:predicate:reverse | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            <td class="celdasTabla"> {{factura.id_factura}}</td>
+                            <td class="celdasTabla"> {{meses[factura.month-1]}} - {{factura.year}}</td>
+                            <td class="celdasTabla"> {{factura.importe}} €</td>
+                            <td class="celdasTabla"> {{factura.importeCobrado}} €</td>
+                            <td class="celdasTabla"> {{factura.importePendiente}} €</td>
+                            <td class="celdasTabla cobrada_{{factura.cobrada}} factura_{{factura.estado}}">
+                                    <span class="glyphicon glyphicon-list-alt cursor-pointer" aria-hidden="true" ng-click="showFactura(factura)"></span>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
